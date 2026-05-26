@@ -21,19 +21,19 @@ const UserPanel: React.FC<Props> = ({ onAdmin }) => {
           <div className="-mt-4 mb-4">
             <button
               onClick={() => setDepositOpen(true)}
-              className="w-full bg-white border-2 border-black text-black rounded-xl py-3 px-4 font-semibold text-sm flex items-center justify-center gap-2 hover:bg-black hover:text-white transition"
+              className="w-full bg-primary border-2 border-primary text-primary-foreground rounded-xl py-3 px-4 font-semibold text-sm flex items-center justify-center gap-2 hover:bg-primary/90 transition"
             >
               <Plus className="w-4 h-4" /> Add Funds
             </button>
           </div>
-          <h2 className="text-sm font-bold uppercase tracking-wider text-black/60 mb-3">Services</h2>
+          <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground mb-3">Services</h2>
           <div className="grid grid-cols-3 gap-2 mb-6">
             <ServiceTile icon={Smartphone} label="IMEI" onClick={() => setTab('imei')} />
             <ServiceTile icon={Server} label="Server" onClick={() => setTab('server')} />
             <ServiceTile icon={Monitor} label="Remote" onClick={() => setTab('remote')} />
           </div>
 
-          <h2 className="text-sm font-bold uppercase tracking-wider text-black/60 mb-3">Quick Access</h2>
+          <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground mb-3">Quick Access</h2>
           <div className="grid grid-cols-2 gap-2">
             <QuickTile icon={Receipt} label="My Orders" onClick={() => setTab('orders')} />
             <QuickTile icon={Wallet} label="Wallet" onClick={() => setTab('wallet')} />
@@ -49,13 +49,13 @@ const UserPanel: React.FC<Props> = ({ onAdmin }) => {
   };
 
   return (
-    <div className="min-h-screen bg-white text-black">
+    <div className="min-h-screen bg-background text-foreground">
       <UserHeader onAdmin={onAdmin} />
       <div className="max-w-2xl mx-auto">
         {renderContent()}
       </div>
 
-      <nav className="fixed bottom-0 inset-x-0 bg-black text-white border-t border-white/10">
+      <nav className="fixed bottom-0 inset-x-0 bg-card text-foreground border-t border-border">
         <div className="max-w-2xl mx-auto grid grid-cols-5">
           <NavBtn active={tab === 'home'} onClick={() => setTab('home')} icon={Home} label="Home" />
           <NavBtn active={tab === 'imei'} onClick={() => setTab('imei')} icon={Smartphone} label="IMEI" />
@@ -71,24 +71,24 @@ const UserPanel: React.FC<Props> = ({ onAdmin }) => {
 };
 
 const ServiceTile: React.FC<{ icon: any; label: string; onClick: () => void }> = ({ icon: Icon, label, onClick }) => (
-  <button onClick={onClick} className="aspect-square bg-black text-white rounded-2xl p-4 flex flex-col items-center justify-center gap-2 hover:bg-black/90 transition">
+  <button onClick={onClick} className="aspect-square bg-primary text-primary-foreground rounded-2xl p-4 flex flex-col items-center justify-center gap-2 hover:bg-primary/90 transition">
     <Icon className="w-6 h-6" />
     <span className="text-xs font-semibold uppercase tracking-wide">{label}</span>
   </button>
 );
 
 const QuickTile: React.FC<{ icon: any; label: string; onClick: () => void }> = ({ icon: Icon, label, onClick }) => (
-  <button onClick={onClick} className="bg-white border border-black/10 rounded-xl p-4 flex items-center gap-3 hover:border-black transition">
+  <button onClick={onClick} className="bg-card border border-border rounded-xl p-4 flex items-center gap-3 hover:border-foreground transition">
     <Icon className="w-5 h-5" />
     <span className="text-sm font-semibold">{label}</span>
   </button>
 );
 
 const NavBtn: React.FC<{ active: boolean; onClick: () => void; icon: any; label: string }> = ({ active, onClick, icon: Icon, label }) => (
-  <button onClick={onClick} className={`py-3 flex flex-col items-center gap-1 transition ${active ? 'text-white' : 'text-white/50'}`}>
+  <button onClick={onClick} className={`py-3 flex flex-col items-center gap-1 transition ${active ? 'text-foreground' : 'text-muted-foreground'}`}>
     <Icon className="w-4 h-4" />
     <span className="text-[10px] font-semibold">{label}</span>
-    {active && <div className="absolute top-0 w-8 h-0.5 bg-white" />}
+    {active && <div className="absolute top-0 w-8 h-0.5 bg-primary" />}
   </button>
 );
 

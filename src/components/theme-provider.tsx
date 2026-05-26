@@ -4,7 +4,7 @@ import * as React from "react"
 import { createContext, useContext, useEffect, useState } from "react"
 import { ThemeProviderProps } from "next-themes/dist/types"
 
-type Theme = "dark" | "light" | "system"
+type Theme = "dark" | "light" | "system" | "midnight-gold"
 
 type ThemeContextType = {
   theme: Theme
@@ -12,6 +12,8 @@ type ThemeContextType = {
 }
 
 const ThemeContext = createContext<ThemeContextType | null>(null)
+
+const THEME_CLASSES = ["light", "dark", "midnight-gold"] as const
 
 export function ThemeProvider({
   children,
@@ -22,7 +24,7 @@ export function ThemeProvider({
   const [theme, setTheme] = useState<Theme>(() => {
     if (typeof window !== "undefined") {
       const savedTheme = localStorage.getItem("theme")
-      return (savedTheme && (savedTheme === "dark" || savedTheme === "light" || savedTheme === "system")
+      return (savedTheme && THEME_CLASSES.includes(savedTheme as typeof THEME_CLASSES[number]) || savedTheme === "system"
         ? savedTheme
         : defaultTheme) as Theme
     }
@@ -31,7 +33,7 @@ export function ThemeProvider({
 
   useEffect(() => {
     const root = window.document.documentElement
-    root.classList.remove("light", "dark")
+    THEME_CLASSES.forEach((cls) => root.classList.remove(cls))
 
     if (theme === "system") {
       const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")

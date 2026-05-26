@@ -51,25 +51,25 @@ const AuthScreen: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center px-6 py-10">
+    <div className="min-h-screen bg-background text-foreground flex flex-col items-center justify-center px-6 py-10">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white text-black font-black text-2xl mb-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary text-primary-foreground font-black text-2xl mb-4">
             D
           </div>
           <h1 className="text-3xl font-bold tracking-tight">DHRU Reseller</h1>
-          <p className="text-white/60 mt-1 text-sm">IMEI · Server · Remote Services</p>
+          <p className="text-muted-foreground mt-1 text-sm">IMEI · Server · Remote Services</p>
         </div>
 
-        <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
-          <div className="flex gap-1 mb-6 p-1 bg-white/5 rounded-xl">
+        <div className="bg-card border border-border rounded-2xl p-6">
+          <div className="flex gap-1 mb-6 p-1 bg-secondary rounded-xl">
             {(['login', 'register', 'phone'] as const).map((m) => (
               <button
                 key={m}
                 type="button"
                 onClick={() => { setMode(m); setError(''); setCodeSent(false); }}
                 className={`flex-1 py-2 text-xs font-semibold rounded-lg transition ${
-                  mode === m ? 'bg-white text-black' : 'text-white/60 hover:text-white'
+                  mode === m ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:text-foreground'
                 }`}
               >
                 {m === 'login' ? 'Sign In' : m === 'register' ? 'Register' : 'Phone'}
@@ -80,31 +80,31 @@ const AuthScreen: React.FC = () => {
           <form onSubmit={handleSubmit} className="space-y-3">
             {mode === 'register' && (
               <div className="relative">
-                <User className="absolute left-3 top-3.5 w-4 h-4 text-white/40" />
+                <User className="absolute left-3 top-3.5 w-4 h-4 text-muted-foreground" />
                 <input
                   value={name} onChange={(e) => setName(e.target.value)}
                   placeholder="Full name" required
-                  className="w-full pl-10 pr-3 py-3 bg-black border border-white/15 rounded-lg text-sm focus:border-white outline-none"
+                  className="w-full pl-10 pr-3 py-3 bg-background border border-border rounded-lg text-sm text-foreground focus:border-foreground outline-none"
                 />
               </div>
             )}
             {mode === 'phone' ? (
               <>
                 <div className="relative">
-                  <Phone className="absolute left-3 top-3.5 w-4 h-4 text-white/40" />
+                  <Phone className="absolute left-3 top-3.5 w-4 h-4 text-muted-foreground" />
                   <input
                     value={phone} onChange={(e) => setPhone(e.target.value)}
                     placeholder="+1 555 000 0000" required
-                    className="w-full pl-10 pr-3 py-3 bg-black border border-white/15 rounded-lg text-sm focus:border-white outline-none"
+                    className="w-full pl-10 pr-3 py-3 bg-background border border-border rounded-lg text-sm text-foreground focus:border-foreground outline-none"
                   />
                 </div>
                 {codeSent && (
                   <div className="relative">
-                    <Lock className="absolute left-3 top-3.5 w-4 h-4 text-white/40" />
+                    <Lock className="absolute left-3 top-3.5 w-4 h-4 text-muted-foreground" />
                     <input
                       value={code} onChange={(e) => setCode(e.target.value)}
                       placeholder="6-digit code" required
-                      className="w-full pl-10 pr-3 py-3 bg-black border border-white/15 rounded-lg text-sm focus:border-white outline-none tracking-widest"
+                      className="w-full pl-10 pr-3 py-3 bg-background border border-border rounded-lg text-sm text-foreground focus:border-foreground outline-none tracking-widest"
                     />
                   </div>
                 )}
@@ -112,28 +112,28 @@ const AuthScreen: React.FC = () => {
             ) : (
               <>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-3.5 w-4 h-4 text-white/40" />
+                  <Mail className="absolute left-3 top-3.5 w-4 h-4 text-muted-foreground" />
                   <input
                     type="email" value={email} onChange={(e) => setEmail(e.target.value)}
                     placeholder="Email" required
-                    className="w-full pl-10 pr-3 py-3 bg-black border border-white/15 rounded-lg text-sm focus:border-white outline-none"
+                    className="w-full pl-10 pr-3 py-3 bg-background border border-border rounded-lg text-sm text-foreground focus:border-foreground outline-none"
                   />
                 </div>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-3.5 w-4 h-4 text-white/40" />
+                  <Lock className="absolute left-3 top-3.5 w-4 h-4 text-muted-foreground" />
                   <input
                     type="password" value={password} onChange={(e) => setPassword(e.target.value)}
                     placeholder="Password" required
-                    className="w-full pl-10 pr-3 py-3 bg-black border border-white/15 rounded-lg text-sm focus:border-white outline-none"
+                    className="w-full pl-10 pr-3 py-3 bg-background border border-border rounded-lg text-sm text-foreground focus:border-foreground outline-none"
                   />
                 </div>
                 {mode === 'register' && (
                   <div className="relative">
-                    <Phone className="absolute left-3 top-3.5 w-4 h-4 text-white/40" />
+                    <Phone className="absolute left-3 top-3.5 w-4 h-4 text-muted-foreground" />
                     <input
                       value={phone} onChange={(e) => setPhone(e.target.value)}
                       placeholder="Phone (optional)"
-                      className="w-full pl-10 pr-3 py-3 bg-black border border-white/15 rounded-lg text-sm focus:border-white outline-none"
+                      className="w-full pl-10 pr-3 py-3 bg-background border border-border rounded-lg text-sm text-foreground focus:border-foreground outline-none"
                     />
                   </div>
                 )}
@@ -141,14 +141,14 @@ const AuthScreen: React.FC = () => {
             )}
 
             {error && (
-              <div className="text-xs px-3 py-2 rounded-lg bg-white/10 text-white border border-white/20">
+              <div className="text-xs px-3 py-2 rounded-lg bg-secondary text-foreground border border-border">
                 {error}
               </div>
             )}
 
             <button
               type="submit" disabled={loading}
-              className="w-full py-3 rounded-lg bg-white text-black font-semibold text-sm hover:bg-white/90 disabled:opacity-50 flex items-center justify-center gap-2"
+              className="w-full py-3 rounded-lg bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary/90 disabled:opacity-50 flex items-center justify-center gap-2"
             >
               {loading && <Loader2 className="w-4 h-4 animate-spin" />}
               {mode === 'login' ? 'Sign In' : mode === 'register' ? 'Create Account' : codeSent ? 'Verify Code' : 'Send Code'}
@@ -156,25 +156,25 @@ const AuthScreen: React.FC = () => {
           </form>
 
           <div className="mt-6">
-            <div className="flex items-center gap-3 text-xs text-white/40 mb-4">
-              <div className="flex-1 h-px bg-white/10" />
+            <div className="flex items-center gap-3 text-xs text-muted-foreground mb-4">
+              <div className="flex-1 h-px bg-border" />
               <span>or continue with</span>
-              <div className="flex-1 h-px bg-white/10" />
+              <div className="flex-1 h-px bg-border" />
             </div>
             <div className="grid grid-cols-3 gap-2">
-              <button type="button" onClick={() => handleOAuth('google')} className="py-2.5 rounded-lg border border-white/15 hover:bg-white hover:text-black transition text-xs font-medium">
+              <button type="button" onClick={() => handleOAuth('google')} className="py-2.5 rounded-lg border border-border hover:bg-primary hover:text-primary-foreground transition text-xs font-medium">
                 Google
               </button>
-              <button type="button" onClick={() => handleOAuth('x')} className="py-2.5 rounded-lg border border-white/15 hover:bg-white hover:text-black transition text-xs font-medium">
+              <button type="button" onClick={() => handleOAuth('x')} className="py-2.5 rounded-lg border border-border hover:bg-primary hover:text-primary-foreground transition text-xs font-medium">
                 X.com
               </button>
-              <button type="button" onClick={() => handleOAuth('facebook')} className="py-2.5 rounded-lg border border-white/15 hover:bg-white hover:text-black transition text-xs font-medium">
+              <button type="button" onClick={() => handleOAuth('facebook')} className="py-2.5 rounded-lg border border-border hover:bg-primary hover:text-primary-foreground transition text-xs font-medium">
                 Facebook
               </button>
             </div>
           </div>
 
-          <div className="mt-6 text-center text-xs text-white/40">
+          <div className="mt-6 text-center text-xs text-muted-foreground">
             Demo: admin@dhru.app / admin123 · user@dhru.app / user123
           </div>
         </div>

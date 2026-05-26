@@ -24,9 +24,9 @@ const AdminRefunds: React.FC = () => {
         <Card label="Total Amount" value={fmt(total)} />
         <Card label="This Month" value={refunds.filter((r) => new Date(r.created_at).getMonth() === new Date().getMonth()).length.toString()} />
       </div>
-      <div className="bg-white/5 border border-white/10 rounded-xl overflow-hidden">
+      <div className="bg-card border border-border rounded-xl overflow-hidden">
         <table className="w-full text-sm">
-          <thead className="bg-white/5 text-white/60 text-xs uppercase">
+          <thead className="bg-secondary text-muted-foreground text-xs uppercase">
             <tr>
               <th className="text-left p-3">Customer</th>
               <th className="text-left p-3">Reason</th>
@@ -36,14 +36,14 @@ const AdminRefunds: React.FC = () => {
           </thead>
           <tbody>
             {refunds.map((r) => (
-              <tr key={r.id} className="border-t border-white/5">
+              <tr key={r.id} className="border-t border-border/50">
                 <td className="p-3">{users[r.user_id]?.email || 'Unknown'}</td>
-                <td className="p-3 text-white/60 text-xs">{r.reason}</td>
+                <td className="p-3 text-muted-foreground text-xs">{r.reason}</td>
                 <td className="p-3 text-right font-bold">{fmt(r.amount)}</td>
-                <td className="p-3 text-xs text-white/60">{fmtDate(r.created_at)}</td>
+                <td className="p-3 text-xs text-muted-foreground">{fmtDate(r.created_at)}</td>
               </tr>
             ))}
-            {refunds.length === 0 && <tr><td colSpan={4} className="text-center py-12 text-white/40">No refunds yet</td></tr>}
+            {refunds.length === 0 && <tr><td colSpan={4} className="text-center py-12 text-muted-foreground">No refunds yet</td></tr>}
           </tbody>
         </table>
       </div>
@@ -52,8 +52,8 @@ const AdminRefunds: React.FC = () => {
 };
 
 const Card: React.FC<{ label: string; value: string }> = ({ label, value }) => (
-  <div className="bg-white/5 border border-white/10 rounded-xl p-4">
-    <div className="text-xs text-white/50 uppercase tracking-wider">{label}</div>
+  <div className="bg-card border border-border rounded-xl p-4">
+    <div className="text-xs text-muted-foreground uppercase tracking-wider">{label}</div>
     <div className="text-2xl font-bold mt-1">{value}</div>
   </div>
 );

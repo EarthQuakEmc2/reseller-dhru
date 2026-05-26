@@ -32,30 +32,30 @@ const OrdersList: React.FC = () => {
     <div className="px-4 pb-24">
       <div className="flex items-center justify-between mb-4 mt-2">
         <h2 className="text-lg font-bold">My Orders</h2>
-        <button onClick={fetch} className="p-2 rounded-lg hover:bg-black/5">
+        <button onClick={fetch} className="p-2 rounded-lg hover:bg-secondary">
           <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
         </button>
       </div>
       {orders.length === 0 ? (
         <div className="text-center py-20">
-          <Package className="w-12 h-12 mx-auto text-black/20 mb-3" />
-          <div className="text-sm text-black/50">No orders yet</div>
+          <Package className="w-12 h-12 mx-auto text-muted-foreground/50 mb-3" />
+          <div className="text-sm text-muted-foreground">No orders yet</div>
         </div>
       ) : (
         <div className="space-y-2">
           {orders.map((o) => (
-            <div key={o.id} className="bg-white border border-black/10 rounded-xl p-4">
+            <div key={o.id} className="bg-card border border-border rounded-xl p-4">
               <div className="flex items-start justify-between gap-2 mb-2">
                 <div className="flex-1 min-w-0">
                   <div className="font-semibold text-sm leading-tight">{o.product_name}</div>
-                  <div className="text-xs text-black/50 mt-0.5">{fmtDate(o.created_at)}</div>
+                  <div className="text-xs text-muted-foreground mt-0.5">{fmtDate(o.created_at)}</div>
                 </div>
-                <span className={`shrink-0 text-xs px-2 py-1 rounded-md border font-semibold uppercase ${statusStyles[o.status] || 'bg-black/5'}`}>
+                <span className={`shrink-0 text-xs px-2 py-1 rounded-md border font-semibold uppercase ${statusStyles[o.status] || 'bg-secondary'}`}>
                   {o.status}
                 </span>
               </div>
               {o.input_value && (
-                <div className="text-xs font-mono bg-black/5 rounded px-2 py-1 mb-2 truncate">{o.input_value}</div>
+                <div className="text-xs font-mono bg-secondary rounded px-2 py-1 mb-2 truncate">{o.input_value}</div>
               )}
               {o.delivery_info && (
                 <div className="text-xs bg-green-50 border border-green-200 rounded px-2 py-2 mb-2">
@@ -64,7 +64,7 @@ const OrdersList: React.FC = () => {
                 </div>
               )}
               <div className="flex items-center justify-between text-xs">
-                <span className="text-black/50 uppercase">{o.service_type}</span>
+                <span className="text-muted-foreground uppercase">{o.service_type}</span>
                 <span className="font-bold">{fmt(o.amount)}</span>
               </div>
             </div>

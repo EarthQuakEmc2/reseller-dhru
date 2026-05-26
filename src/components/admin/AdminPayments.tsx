@@ -36,15 +36,15 @@ const AdminPayments: React.FC = () => {
 
       <div className="flex items-center justify-between">
         <h3 className="font-bold">Recent Payments</h3>
-        <button onClick={load} className="px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-sm flex items-center gap-2 hover:bg-white/20">
+        <button onClick={load} className="px-3 py-2 bg-secondary border border-border rounded-lg text-sm flex items-center gap-2 hover:bg-secondary/80">
           <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} /> Refresh
         </button>
       </div>
 
-      <div className="bg-white/5 border border-white/10 rounded-xl overflow-hidden">
+      <div className="bg-card border border-border rounded-xl overflow-hidden">
         <div className="max-h-[60vh] overflow-y-auto">
           <table className="w-full text-sm">
-            <thead className="bg-white/5 text-white/60 text-xs uppercase sticky top-0 backdrop-blur">
+            <thead className="bg-secondary text-muted-foreground text-xs uppercase sticky top-0 backdrop-blur">
               <tr>
                 <th className="text-left p-3">Customer</th>
                 <th className="text-left p-3 hidden md:table-cell">Description</th>
@@ -57,37 +57,37 @@ const AdminPayments: React.FC = () => {
               {deposits.map((d) => {
                 const u = users[d.user_id];
                 return (
-                  <tr key={d.id} className="border-t border-white/5 hover:bg-white/5">
+                  <tr key={d.id} className="border-t border-border/50 hover:bg-secondary/50">
                     <td className="p-3">
                       <div className="font-semibold">{u?.name || 'Unknown'}</div>
-                      <div className="text-xs text-white/40">{u?.email}</div>
+                      <div className="text-xs text-muted-foreground">{u?.email}</div>
                     </td>
-                    <td className="p-3 hidden md:table-cell text-xs text-white/60 font-mono truncate max-w-xs">{d.description}</td>
-                    <td className="p-3 text-xs text-white/60">{fmtDate(d.created_at)}</td>
+                    <td className="p-3 hidden md:table-cell text-xs text-muted-foreground font-mono truncate max-w-xs">{d.description}</td>
+                    <td className="p-3 text-xs text-muted-foreground">{fmtDate(d.created_at)}</td>
                     <td className="p-3 text-right font-bold text-green-400">+{fmt(d.amount)}</td>
-                    <td className="p-3 text-right hidden md:table-cell text-white/60">{fmt(d.balance_after)}</td>
+                    <td className="p-3 text-right hidden md:table-cell text-muted-foreground">{fmt(d.balance_after)}</td>
                   </tr>
                 );
               })}
               {deposits.length === 0 && (
-                <tr><td colSpan={5} className="text-center py-12 text-white/40">No payments yet. Deposits will appear here once customers add funds.</td></tr>
+                <tr><td colSpan={5} className="text-center py-12 text-muted-foreground">No payments yet. Deposits will appear here once customers add funds.</td></tr>
               )}
             </tbody>
           </table>
         </div>
       </div>
 
-      <div className="bg-white/5 border border-white/10 rounded-xl p-4 text-xs text-white/60">
-        <strong className="text-white">FamousPay Integration:</strong> All deposits are processed through Stripe via the FamousPay gateway with a 2% platform fee. Funds are credited to user wallets only after successful payment confirmation. Payment IDs are stored in the transaction description for reconciliation.
+      <div className="bg-card border border-border rounded-xl p-4 text-xs text-muted-foreground">
+        <strong className="text-foreground">FamousPay Integration:</strong> All deposits are processed through Stripe via the FamousPay gateway with a 2% platform fee. Funds are credited to user wallets only after successful payment confirmation. Payment IDs are stored in the transaction description for reconciliation.
       </div>
     </div>
   );
 };
 
 const Stat: React.FC<{ icon: any; label: string; value: string; highlight?: boolean }> = ({ icon: Icon, label, value, highlight }) => (
-  <div className={`${highlight ? 'bg-white text-black' : 'bg-white/5 border border-white/10'} rounded-xl p-4`}>
-    <Icon className={`w-5 h-5 ${highlight ? 'text-black/60' : 'text-white/60'} mb-2`} />
-    <div className={`text-xs ${highlight ? 'text-black/60' : 'text-white/50'} uppercase tracking-wider`}>{label}</div>
+  <div className={`${highlight ? 'bg-primary text-primary-foreground' : 'bg-card border border-border'} rounded-xl p-4`}>
+    <Icon className={`w-5 h-5 ${highlight ? 'text-primary-foreground/60' : 'text-muted-foreground'} mb-2`} />
+    <div className={`text-xs ${highlight ? 'text-primary-foreground/60' : 'text-muted-foreground'} uppercase tracking-wider`}>{label}</div>
     <div className="text-xl font-bold mt-1">{value}</div>
   </div>
 );
