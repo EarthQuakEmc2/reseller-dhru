@@ -30,14 +30,14 @@ const AdminPanel: React.FC<Props> = ({ onExitAdmin }) => {
   const [navOpen, setNavOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-black text-white flex">
-      <aside className={`fixed inset-y-0 left-0 z-40 w-64 bg-black border-r border-white/10 transform ${navOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 transition-transform`}>
-        <div className="p-5 border-b border-white/10">
+    <div className="min-h-screen bg-background text-foreground flex">
+      <aside className={`fixed inset-y-0 left-0 z-40 w-64 bg-background border-r border-border transform ${navOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 transition-transform`}>
+        <div className="p-5 border-b border-border">
           <div className="flex items-center gap-2">
-            <div className="w-9 h-9 bg-white text-black rounded-lg flex items-center justify-center font-black">D</div>
+            <div className="w-9 h-9 bg-primary text-primary-foreground rounded-lg flex items-center justify-center font-black">D</div>
             <div>
               <div className="font-bold text-sm">DHRU Admin</div>
-              <div className="text-xs text-white/40">Control Center</div>
+              <div className="text-xs text-muted-foreground">Control Center</div>
             </div>
           </div>
         </div>
@@ -48,18 +48,18 @@ const AdminPanel: React.FC<Props> = ({ onExitAdmin }) => {
             return (
               <button key={t.id} onClick={() => { setTab(t.id); setNavOpen(false); }}
                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition ${
-                  active ? 'bg-white text-black' : 'text-white/70 hover:bg-white/5 hover:text-white'
+                  active ? 'bg-primary text-primary-foreground' : 'text-foreground/70 hover:bg-secondary hover:text-foreground'
                 }`}>
                 <Icon className="w-4 h-4" /> {t.label}
               </button>
             );
           })}
         </nav>
-        <div className="absolute bottom-0 inset-x-0 p-3 border-t border-white/10 space-y-1">
-          <button onClick={onExitAdmin} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-white/70 hover:bg-white/5 hover:text-white">
+        <div className="absolute bottom-0 inset-x-0 p-3 border-t border-border space-y-1">
+          <button onClick={onExitAdmin} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-foreground/70 hover:bg-secondary hover:text-foreground">
             <ArrowLeft className="w-4 h-4" /> Back to App
           </button>
-          <button onClick={signOut} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-white/70 hover:bg-white/5 hover:text-white">
+          <button onClick={signOut} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-foreground/70 hover:bg-secondary hover:text-foreground">
             <LogOut className="w-4 h-4" /> Sign Out
           </button>
         </div>
@@ -68,8 +68,8 @@ const AdminPanel: React.FC<Props> = ({ onExitAdmin }) => {
       {navOpen && <div className="lg:hidden fixed inset-0 bg-black/50 z-30" onClick={() => setNavOpen(false)} />}
 
       <div className="flex-1 lg:ml-64 flex flex-col min-h-screen">
-        <header className="border-b border-white/10 p-4 flex items-center gap-3 lg:hidden">
-          <button onClick={() => setNavOpen(true)} className="p-2 rounded-lg bg-white/10">
+        <header className="border-b border-border p-4 flex items-center gap-3 lg:hidden">
+          <button onClick={() => setNavOpen(true)} className="p-2 rounded-lg bg-secondary">
             <LayoutDashboard className="w-4 h-4" />
           </button>
           <div className="font-bold">DHRU Admin</div>

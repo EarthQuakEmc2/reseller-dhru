@@ -32,19 +32,19 @@ const AdminDashboard: React.FC = () => {
         <Stat icon={DollarSign} label="Revenue" value={fmt(stats.revenue)} highlight />
       </div>
 
-      <div className="bg-white/5 border border-white/10 rounded-xl p-5">
+      <div className="bg-card border border-border rounded-xl p-5">
         <h3 className="font-bold mb-3">Recent Orders</h3>
         <div className="space-y-2">
           {recent.map((o) => (
-            <div key={o.id} className="flex items-center justify-between py-2 border-b border-white/5 last:border-0">
+            <div key={o.id} className="flex items-center justify-between py-2 border-b border-border/50 last:border-0">
               <div className="flex-1 min-w-0">
                 <div className="font-medium text-sm truncate">{o.product_name}</div>
-                <div className="text-xs text-white/40 uppercase">{o.service_type} · {o.status}</div>
+                <div className="text-xs text-muted-foreground uppercase">{o.service_type} · {o.status}</div>
               </div>
               <div className="font-bold">{fmt(o.amount)}</div>
             </div>
           ))}
-          {recent.length === 0 && <div className="text-center text-white/40 py-8 text-sm">No orders yet</div>}
+          {recent.length === 0 && <div className="text-center text-muted-foreground py-8 text-sm">No orders yet</div>}
         </div>
       </div>
     </div>
@@ -52,9 +52,9 @@ const AdminDashboard: React.FC = () => {
 };
 
 const Stat: React.FC<{ icon: any; label: string; value: string; highlight?: boolean }> = ({ icon: Icon, label, value, highlight }) => (
-  <div className={`${highlight ? 'bg-white text-black' : 'bg-white/5 border border-white/10'} rounded-xl p-4`}>
-    <Icon className={`w-5 h-5 ${highlight ? 'text-black/60' : 'text-white/60'} mb-2`} />
-    <div className={`text-xs ${highlight ? 'text-black/60' : 'text-white/50'} uppercase tracking-wider`}>{label}</div>
+  <div className={`${highlight ? 'bg-primary text-primary-foreground' : 'bg-card border border-border'} rounded-xl p-4`}>
+    <Icon className={`w-5 h-5 ${highlight ? 'text-primary-foreground/60' : 'text-muted-foreground'} mb-2`} />
+    <div className={`text-xs ${highlight ? 'text-primary-foreground/60' : 'text-muted-foreground'} uppercase tracking-wider`}>{label}</div>
     <div className="text-xl font-bold mt-1">{value}</div>
   </div>
 );

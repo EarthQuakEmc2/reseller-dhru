@@ -79,35 +79,35 @@ const OrderModal: React.FC<Props> = ({ product, onClose }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm" onClick={onClose}>
-      <div onClick={(e) => e.stopPropagation()} className="w-full sm:max-w-md bg-white rounded-t-3xl sm:rounded-2xl p-6 max-h-[90vh] overflow-y-auto">
+      <div onClick={(e) => e.stopPropagation()} className="w-full sm:max-w-md bg-card rounded-t-3xl sm:rounded-2xl p-6 max-h-[90vh] overflow-y-auto">
         {success ? (
           <div className="py-10 text-center">
-            <div className="w-16 h-16 rounded-full bg-black text-white mx-auto mb-4 flex items-center justify-center">
+            <div className="w-16 h-16 rounded-full bg-primary text-primary-foreground mx-auto mb-4 flex items-center justify-center">
               <Check className="w-8 h-8" />
             </div>
             <h3 className="font-bold text-lg">Order Placed!</h3>
-            <p className="text-sm text-black/60 mt-1">Your order has been submitted to the server.</p>
+            <p className="text-sm text-muted-foreground mt-1">Your order has been submitted to the server.</p>
           </div>
         ) : (
           <>
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-bold">Place Order</h3>
-              <button onClick={onClose} className="p-1 rounded-lg hover:bg-black/5">
+              <button onClick={onClose} className="p-1 rounded-lg hover:bg-secondary">
                 <X className="w-5 h-5" />
               </button>
             </div>
-            <div className="bg-black text-white rounded-xl p-4 mb-4">
-              <div className="text-xs text-white/60 uppercase tracking-wide mb-1">{product.service_type} Service</div>
+            <div className="bg-primary text-primary-foreground rounded-xl p-4 mb-4">
+              <div className="text-xs text-primary-foreground/60 uppercase tracking-wide mb-1">{product.service_type} Service</div>
               <div className="font-semibold text-sm">{product.name}</div>
-              {product.category_name && <div className="text-xs text-white/50 mt-1">{product.category_name}</div>}
-              <div className="flex items-center justify-between mt-3 pt-3 border-t border-white/10">
-                <div className="text-xs text-white/60">Total</div>
+              {product.category_name && <div className="text-xs text-primary-foreground/50 mt-1">{product.category_name}</div>}
+              <div className="flex items-center justify-between mt-3 pt-3 border-t border-primary-foreground/10">
+                <div className="text-xs text-primary-foreground/60">Total</div>
                 <div className="text-xl font-bold">{fmt(price)}</div>
               </div>
             </div>
 
             {(product.custom_description || product.description) && (
-              <div className="text-xs text-black/60 mb-4 p-3 bg-black/5 rounded-lg">
+              <div className="text-xs text-muted-foreground mb-4 p-3 bg-secondary rounded-lg">
                 {product.custom_description || product.description}
               </div>
             )}
@@ -116,11 +116,11 @@ const OrderModal: React.FC<Props> = ({ product, onClose }) => {
             <input
               value={input} onChange={(e) => setInput(e.target.value)}
               placeholder="Enter value..."
-              className="w-full px-3 py-3 border-2 border-black/10 rounded-lg focus:border-black outline-none text-sm font-mono"
+              className="w-full px-3 py-3 border-2 border-border rounded-lg focus:border-foreground outline-none text-sm font-mono bg-background text-foreground"
             />
 
             <div className="flex items-center justify-between mt-4 text-xs">
-              <span className="text-black/60">Your balance</span>
+              <span className="text-muted-foreground">Your balance</span>
               <span className={`font-semibold ${insufficient ? 'text-red-600' : ''}`}>{fmt(user?.wallet_balance || 0)}</span>
             </div>
 
@@ -128,7 +128,7 @@ const OrderModal: React.FC<Props> = ({ product, onClose }) => {
 
             <button
               onClick={handleSubmit} disabled={loading || insufficient}
-              className="w-full mt-4 py-3 rounded-xl bg-black text-white font-semibold flex items-center justify-center gap-2 disabled:opacity-50"
+              className="w-full mt-4 py-3 rounded-xl bg-primary text-primary-foreground font-semibold flex items-center justify-center gap-2 disabled:opacity-50"
             >
               {loading && <Loader2 className="w-4 h-4 animate-spin" />}
               {insufficient ? 'Insufficient Balance' : `Place Order · ${fmt(price)}`}

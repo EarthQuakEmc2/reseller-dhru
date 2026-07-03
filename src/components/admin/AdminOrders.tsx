@@ -90,20 +90,20 @@ const AdminOrders: React.FC = () => {
   return (
     <div className="space-y-3">
       <div className="flex flex-wrap gap-2 items-center">
-        <select value={filter} onChange={(e) => setFilter(e.target.value)} className="px-3 py-2 bg-white/5 border border-white/15 rounded-lg text-sm text-white outline-none">
-          <option value="all" className="text-black">All Orders</option>
-          {statusOptions.map((s) => <option key={s} value={s} className="text-black">{s}</option>)}
+        <select value={filter} onChange={(e) => setFilter(e.target.value)} className="px-3 py-2 bg-card border border-border rounded-lg text-sm text-foreground outline-none">
+          <option value="all" className="bg-background text-foreground">All Orders</option>
+          {statusOptions.map((s) => <option key={s} value={s} className="bg-background text-foreground">{s}</option>)}
         </select>
-        <button onClick={load} className="px-3 py-2 bg-white/10 text-white border border-white/20 rounded-lg text-sm flex items-center gap-2 hover:bg-white/20">
+        <button onClick={load} className="px-3 py-2 bg-secondary text-foreground border border-border rounded-lg text-sm flex items-center gap-2 hover:bg-secondary/80">
           <RefreshCw className="w-4 h-4" /> Refresh
         </button>
-        <span className="text-xs text-white/50">{filtered.length} orders</span>
+        <span className="text-xs text-muted-foreground">{filtered.length} orders</span>
       </div>
 
-      <div className="bg-white/5 border border-white/10 rounded-xl overflow-hidden">
+      <div className="bg-card border border-border rounded-xl overflow-hidden">
         <div className="max-h-[70vh] overflow-y-auto">
           <table className="w-full text-sm">
-            <thead className="bg-white/5 text-white/60 text-xs uppercase sticky top-0 backdrop-blur">
+            <thead className="bg-secondary text-muted-foreground text-xs uppercase sticky top-0 backdrop-blur">
               <tr>
                 <th className="text-left p-3">Customer</th>
                 <th className="text-left p-3">Service</th>
@@ -117,35 +117,35 @@ const AdminOrders: React.FC = () => {
               {filtered.map((o) => {
                 const user = users[o.user_id];
                 return (
-                  <tr key={o.id} className="border-t border-white/5 hover:bg-white/5">
+                  <tr key={o.id} className="border-t border-border/50 hover:bg-secondary/50">
                     <td className="p-3">
                       <div className="font-semibold">{user?.name || 'Unknown'}</div>
-                      <div className="text-xs text-white/40">{user?.email}</div>
+                      <div className="text-xs text-muted-foreground">{user?.email}</div>
                     </td>
                     <td className="p-3">
                       <div className="font-medium">{o.product_name}</div>
-                      <div className="text-xs text-white/40 uppercase">{o.service_type} · {fmtDate(o.created_at)}</div>
+                      <div className="text-xs text-muted-foreground uppercase">{o.service_type} · {fmtDate(o.created_at)}</div>
                     </td>
-                    <td className="p-3 hidden md:table-cell text-xs font-mono text-white/60">{o.input_value}</td>
+                    <td className="p-3 hidden md:table-cell text-xs font-mono text-muted-foreground">{o.input_value}</td>
                     <td className="p-3">
-                      <select value={o.status} onChange={(e) => updateStatus(o.id, e.target.value)} className="bg-white/10 border border-white/20 rounded px-2 py-1 text-xs uppercase">
-                        {statusOptions.map((s) => <option key={s} value={s} className="text-black">{s}</option>)}
+                      <select value={o.status} onChange={(e) => updateStatus(o.id, e.target.value)} className="bg-secondary border border-border rounded px-2 py-1 text-xs uppercase">
+                        {statusOptions.map((s) => <option key={s} value={s} className="bg-background text-foreground">{s}</option>)}
                       </select>
                     </td>
                     <td className="p-3 text-right font-bold">{fmt(o.amount)}</td>
                     <td className="p-3 text-right">
                       <div className="inline-flex gap-1">
-                        <button onClick={() => setDelivery(o)} className="p-1.5 rounded hover:bg-white/10" title="Set delivery"><Check className="w-4 h-4" /></button>
-                        <button onClick={() => generateInvoice(o)} className="p-1.5 rounded hover:bg-white/10" title="Invoice"><FileText className="w-4 h-4" /></button>
+                        <button onClick={() => setDelivery(o)} className="p-1.5 rounded hover:bg-secondary" title="Set delivery"><Check className="w-4 h-4" /></button>
+                        <button onClick={() => generateInvoice(o)} className="p-1.5 rounded hover:bg-secondary" title="Invoice"><FileText className="w-4 h-4" /></button>
                         {o.status !== 'refunded' && (
-                          <button onClick={() => setRefundOrder(o)} className="p-1.5 rounded hover:bg-white/10 text-yellow-300" title="Refund"><RotateCcw className="w-4 h-4" /></button>
+                          <button onClick={() => setRefundOrder(o)} className="p-1.5 rounded hover:bg-secondary text-yellow-300" title="Refund"><RotateCcw className="w-4 h-4" /></button>
                         )}
                       </div>
                     </td>
                   </tr>
                 );
               })}
-              {filtered.length === 0 && <tr><td colSpan={6} className="text-center py-12 text-white/40">No orders</td></tr>}
+              {filtered.length === 0 && <tr><td colSpan={6} className="text-center py-12 text-muted-foreground">No orders</td></tr>}
             </tbody>
           </table>
         </div>
@@ -153,19 +153,19 @@ const AdminOrders: React.FC = () => {
 
       {refundOrder && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4" onClick={() => setRefundOrder(null)}>
-          <div onClick={(e) => e.stopPropagation()} className="w-full max-w-md bg-black border border-white/20 rounded-2xl p-6">
+          <div onClick={(e) => e.stopPropagation()} className="w-full max-w-md bg-card border border-border rounded-2xl p-6">
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-bold flex items-center gap-2"><RotateCcw className="w-5 h-5" /> Refund Customer</h3>
               <button onClick={() => setRefundOrder(null)}><X className="w-5 h-5" /></button>
             </div>
-            <div className="bg-white/5 border border-white/10 rounded-lg p-3 mb-4 text-sm">
-              <div className="text-xs text-white/50">Refund to {users[refundOrder.user_id]?.email}</div>
+            <div className="bg-secondary border border-border rounded-lg p-3 mb-4 text-sm">
+              <div className="text-xs text-muted-foreground">Refund to {users[refundOrder.user_id]?.email}</div>
               <div className="font-semibold mt-1">{refundOrder.product_name}</div>
               <div className="text-2xl font-bold mt-2">{fmt(refundOrder.amount)}</div>
             </div>
-            <label className="block text-xs text-white/60 mb-1 uppercase tracking-wide">Reason</label>
-            <textarea value={refundReason} onChange={(e) => setRefundReason(e.target.value)} rows={3} placeholder="e.g. Service not delivered..." className="w-full px-3 py-2 bg-white/5 border border-white/15 rounded-lg outline-none focus:border-white text-white text-sm mb-4" />
-            <button onClick={processRefund} className="w-full py-3 bg-white text-black rounded-lg font-semibold">
+            <label className="block text-xs text-muted-foreground mb-1 uppercase tracking-wide">Reason</label>
+            <textarea value={refundReason} onChange={(e) => setRefundReason(e.target.value)} rows={3} placeholder="e.g. Service not delivered..." className="w-full px-3 py-2 bg-background border border-border rounded-lg outline-none focus:border-foreground text-foreground text-sm mb-4" />
+            <button onClick={processRefund} className="w-full py-3 bg-primary text-primary-foreground rounded-lg font-semibold">
               Confirm Refund · {fmt(refundOrder.amount)}
             </button>
           </div>

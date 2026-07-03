@@ -23,9 +23,9 @@ const AdminSettings: React.FC = () => {
 
   return (
     <div className="max-w-2xl space-y-4">
-      <div className="bg-white/5 border border-white/10 rounded-xl p-5">
+      <div className="bg-card border border-border rounded-xl p-5">
         <h3 className="font-bold mb-1">DHRU Fission API Configuration</h3>
-        <p className="text-xs text-white/50 mb-5">Credentials for connecting to your DHRU server.</p>
+        <p className="text-xs text-muted-foreground mb-5">Credentials for connecting to your DHRU server.</p>
 
         <div className="space-y-3">
           <Field label="Server URL" value={form.dhru_url} onChange={(v) => setForm({...form, dhru_url: v})} placeholder="https://easy-unlocker.com" />
@@ -33,22 +33,22 @@ const AdminSettings: React.FC = () => {
           <Field label="Password" value={form.dhru_password} onChange={(v) => setForm({...form, dhru_password: v})} type={showSecret ? 'text' : 'password'} />
           <Field label="API Key" value={form.dhru_api_key} onChange={(v) => setForm({...form, dhru_api_key: v})} type={showSecret ? 'text' : 'password'} mono />
 
-          <button onClick={() => setShowSecret((s) => !s)} className="text-xs text-white/60 flex items-center gap-1.5 hover:text-white">
+          <button onClick={() => setShowSecret((s) => !s)} className="text-xs text-muted-foreground flex items-center gap-1.5 hover:text-foreground">
             {showSecret ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
             {showSecret ? 'Hide secrets' : 'Show secrets'}
           </button>
         </div>
 
-        <button onClick={save} className="mt-5 w-full py-3 bg-white text-black rounded-lg font-semibold flex items-center justify-center gap-2">
+        <button onClick={save} className="mt-5 w-full py-3 bg-primary text-primary-foreground rounded-lg font-semibold flex items-center justify-center gap-2">
           <Save className="w-4 h-4" /> {saved ? 'Saved ✓' : 'Save Settings'}
         </button>
       </div>
 
-      <div className="bg-white/5 border border-white/10 rounded-xl p-5 text-sm">
+      <div className="bg-card border border-border rounded-xl p-5 text-sm">
         <h3 className="font-bold mb-2">About DHRU Fission Integration</h3>
-        <p className="text-white/60 leading-relaxed">
+        <p className="text-muted-foreground leading-relaxed">
           This system uses the DHRU Fission HTTP API to pull IMEI, Server, and Remote services from your panel.
-          Once configured, use the <strong>Sync</strong> terminal to import the live service catalog. All product
+          Once configured, use the <strong className="text-foreground">Sync</strong> terminal to import the live service catalog. All product
           edits made here (custom price, custom description, visibility) override the DHRU defaults shown to your customers.
         </p>
       </div>
@@ -58,10 +58,10 @@ const AdminSettings: React.FC = () => {
 
 const Field: React.FC<any> = ({ label, value, onChange, type = 'text', placeholder, mono }) => (
   <div>
-    <label className="block text-xs text-white/60 mb-1 uppercase tracking-wide">{label}</label>
+    <label className="block text-xs text-muted-foreground mb-1 uppercase tracking-wide">{label}</label>
     <input
       type={type} value={value || ''} onChange={(e) => onChange(e.target.value)} placeholder={placeholder}
-      className={`w-full px-3 py-2 bg-black border border-white/15 rounded-lg text-white outline-none focus:border-white text-sm ${mono ? 'font-mono' : ''}`}
+      className={`w-full px-3 py-2 bg-background border border-border rounded-lg text-foreground outline-none focus:border-foreground text-sm ${mono ? 'font-mono' : ''}`}
     />
   </div>
 );

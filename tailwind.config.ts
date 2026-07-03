@@ -3,7 +3,7 @@ import animate from "tailwindcss-animate";
 import typography from "@tailwindcss/typography";
 
 export default {
-  darkMode: ["class"],
+  darkMode: ["class", ".midnight-gold"],
   content: [
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",

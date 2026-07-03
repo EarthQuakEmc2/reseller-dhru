@@ -88,24 +88,24 @@ const AdminTerminal: React.FC = () => {
   const colorFor = (t: Line['type']) =>
     t === 'success' ? 'text-green-400' :
     t === 'error' ? 'text-red-400' :
-    t === 'cmd' ? 'text-yellow-300' :
-    t === 'data' ? 'text-cyan-300' : 'text-white/70';
+    t === 'cmd' ? 'text-foreground' :
+    t === 'data' ? 'text-cyan-300' : 'text-foreground/70';
 
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap gap-2">
-        <button onClick={testConnection} disabled={testing} className="px-4 py-2 bg-white text-black rounded-lg font-semibold text-sm flex items-center gap-2 disabled:opacity-50">
+        <button onClick={testConnection} disabled={testing} className="px-4 py-2 bg-primary text-primary-foreground rounded-lg font-semibold text-sm flex items-center gap-2 disabled:opacity-50">
           {testing ? <Loader2 className="w-4 h-4 animate-spin" /> : <Wifi className="w-4 h-4" />}
           Test Connection
         </button>
-        <button onClick={syncProducts} disabled={syncing} className="px-4 py-2 bg-white text-black rounded-lg font-semibold text-sm flex items-center gap-2 disabled:opacity-50">
+        <button onClick={syncProducts} disabled={syncing} className="px-4 py-2 bg-primary text-primary-foreground rounded-lg font-semibold text-sm flex items-center gap-2 disabled:opacity-50">
           {syncing ? <Loader2 className="w-4 h-4 animate-spin" /> : <RefreshCw className="w-4 h-4" />}
           Sync Products
         </button>
-        <button onClick={loadRecentLogs} className="px-4 py-2 bg-white/10 text-white border border-white/20 rounded-lg font-semibold text-sm flex items-center gap-2 hover:bg-white/20">
+        <button onClick={loadRecentLogs} className="px-4 py-2 bg-secondary text-foreground border border-border rounded-lg font-semibold text-sm flex items-center gap-2 hover:bg-secondary/80">
           <Play className="w-4 h-4" /> Reload Logs
         </button>
-        <button onClick={clearTerminal} className="px-4 py-2 bg-white/10 text-white border border-white/20 rounded-lg font-semibold text-sm flex items-center gap-2 hover:bg-white/20">
+        <button onClick={clearTerminal} className="px-4 py-2 bg-secondary text-foreground border border-border rounded-lg font-semibold text-sm flex items-center gap-2 hover:bg-secondary/80">
           <Trash2 className="w-4 h-4" /> Clear Terminal
         </button>
         <button onClick={clearServerLogs} className="px-4 py-2 bg-red-500/10 text-red-300 border border-red-500/30 rounded-lg font-semibold text-sm flex items-center gap-2 hover:bg-red-500/20">
@@ -113,19 +113,19 @@ const AdminTerminal: React.FC = () => {
         </button>
       </div>
 
-      <div className="bg-black border border-white/20 rounded-xl overflow-hidden">
-        <div className="bg-white/5 border-b border-white/10 px-4 py-2 flex items-center gap-2">
+      <div className="bg-background border border-border rounded-xl overflow-hidden">
+        <div className="bg-card border-b border-border px-4 py-2 flex items-center gap-2">
           <div className="flex gap-1.5">
             <div className="w-3 h-3 rounded-full bg-red-500" />
             <div className="w-3 h-3 rounded-full bg-yellow-500" />
             <div className="w-3 h-3 rounded-full bg-green-500" />
           </div>
-          <span className="text-xs text-white/60 font-mono ml-2">dhru-api://easy-unlocker.com</span>
+          <span className="text-xs text-muted-foreground font-mono ml-2">dhru-api://easy-unlocker.com</span>
         </div>
         <div className="h-[60vh] overflow-y-auto p-4 font-mono text-xs leading-relaxed">
           {lines.map((l, i) => (
             <div key={i} className={colorFor(l.type)}>
-              <span className="text-white/30 mr-2">[{l.time}]</span>
+              <span className="text-foreground/30 mr-2">[{l.time}]</span>
               {l.text}
             </div>
           ))}

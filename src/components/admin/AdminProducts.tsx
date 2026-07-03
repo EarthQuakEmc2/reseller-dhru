@@ -58,26 +58,26 @@ const AdminProducts: React.FC = () => {
     <div className="space-y-3">
       <div className="flex flex-wrap gap-2 items-center">
         <div className="relative flex-1 min-w-[200px]">
-          <Search className="absolute left-3 top-2.5 w-4 h-4 text-white/40" />
+          <Search className="absolute left-3 top-2.5 w-4 h-4 text-muted-foreground" />
           <input
             value={search} onChange={(e) => setSearch(e.target.value)}
             placeholder="Search products..."
-            className="w-full pl-9 pr-3 py-2 bg-white/5 border border-white/15 rounded-lg text-sm text-white outline-none focus:border-white"
+            className="w-full pl-9 pr-3 py-2 bg-card border border-border rounded-lg text-sm text-foreground outline-none focus:border-foreground"
           />
         </div>
-        <select value={type} onChange={(e) => setType(e.target.value)} className="px-3 py-2 bg-white/5 border border-white/15 rounded-lg text-sm text-white outline-none">
-          <option value="all" className="text-black">All Types</option>
-          <option value="imei" className="text-black">IMEI</option>
-          <option value="server" className="text-black">Server</option>
-          <option value="remote" className="text-black">Remote</option>
+        <select value={type} onChange={(e) => setType(e.target.value)} className="px-3 py-2 bg-card border border-border rounded-lg text-sm text-foreground outline-none">
+          <option value="all" className="bg-background text-foreground">All Types</option>
+          <option value="imei" className="bg-background text-foreground">IMEI</option>
+          <option value="server" className="bg-background text-foreground">Server</option>
+          <option value="remote" className="bg-background text-foreground">Remote</option>
         </select>
-        <span className="text-xs text-white/50">{filtered.length} items</span>
+        <span className="text-xs text-muted-foreground">{filtered.length} items</span>
       </div>
 
-      <div className="bg-white/5 border border-white/10 rounded-xl overflow-hidden">
+      <div className="bg-card border border-border rounded-xl overflow-hidden">
         <div className="max-h-[70vh] overflow-y-auto">
           <table className="w-full text-sm">
-            <thead className="bg-white/5 text-white/60 text-xs uppercase tracking-wider sticky top-0 backdrop-blur">
+            <thead className="bg-secondary text-muted-foreground text-xs uppercase tracking-wider sticky top-0 backdrop-blur">
               <tr>
                 <th className="text-left p-3">Service</th>
                 <th className="text-left p-3 hidden md:table-cell">Category</th>
@@ -88,22 +88,22 @@ const AdminProducts: React.FC = () => {
             </thead>
             <tbody>
               {filtered.map((p) => (
-                <tr key={p.id} className="border-t border-white/5 hover:bg-white/5">
+                <tr key={p.id} className="border-t border-border/50 hover:bg-secondary/50">
                   <td className="p-3">
                     <div className={`font-semibold ${!p.active ? 'opacity-40' : ''}`}>{p.name}</div>
-                    {p.delivery_time && <div className="text-xs text-white/40">{p.delivery_time}</div>}
+                    {p.delivery_time && <div className="text-xs text-muted-foreground">{p.delivery_time}</div>}
                   </td>
-                  <td className="p-3 hidden md:table-cell text-white/60 text-xs">{p.category_name}</td>
-                  <td className="p-3"><span className="text-xs uppercase px-2 py-0.5 bg-white/10 rounded">{p.service_type}</span></td>
+                  <td className="p-3 hidden md:table-cell text-muted-foreground text-xs">{p.category_name}</td>
+                  <td className="p-3"><span className="text-xs uppercase px-2 py-0.5 bg-secondary rounded">{p.service_type}</span></td>
                   <td className="p-3 text-right font-bold">
-                    {p.custom_price ? <><span className="line-through text-white/30 mr-2 text-xs">{fmt(p.price)}</span>{fmt(p.custom_price)}</> : fmt(p.price)}
+                    {p.custom_price ? <><span className="line-through text-foreground/30 mr-2 text-xs">{fmt(p.price)}</span>{fmt(p.custom_price)}</> : fmt(p.price)}
                   </td>
                   <td className="p-3 text-right">
                     <div className="inline-flex gap-1">
-                      <button onClick={() => toggleActive(p)} className="p-1.5 rounded hover:bg-white/10" title={p.active ? 'Hide' : 'Show'}>
+                      <button onClick={() => toggleActive(p)} className="p-1.5 rounded hover:bg-secondary" title={p.active ? 'Hide' : 'Show'}>
                         {p.active ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4 opacity-50" />}
                       </button>
-                      <button onClick={() => startEdit(p)} className="p-1.5 rounded hover:bg-white/10">
+                      <button onClick={() => startEdit(p)} className="p-1.5 rounded hover:bg-secondary">
                         <Edit3 className="w-4 h-4" />
                       </button>
                     </div>
@@ -111,7 +111,7 @@ const AdminProducts: React.FC = () => {
                 </tr>
               ))}
               {filtered.length === 0 && (
-                <tr><td colSpan={5} className="text-center py-12 text-white/40">No products. Sync from terminal.</td></tr>
+                <tr><td colSpan={5} className="text-center py-12 text-muted-foreground">No products. Sync from terminal.</td></tr>
               )}
             </tbody>
           </table>
@@ -120,7 +120,7 @@ const AdminProducts: React.FC = () => {
 
       {editing && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4" onClick={() => setEditing(null)}>
-          <div onClick={(e) => e.stopPropagation()} className="w-full max-w-lg bg-black border border-white/20 rounded-2xl p-6 max-h-[90vh] overflow-y-auto">
+          <div onClick={(e) => e.stopPropagation()} className="w-full max-w-lg bg-card border border-border rounded-2xl p-6 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-bold">Edit Product</h3>
               <button onClick={() => setEditing(null)}><X className="w-5 h-5" /></button>
@@ -134,7 +134,7 @@ const AdminProducts: React.FC = () => {
                 <input type="checkbox" checked={form.active} onChange={(e) => setForm({...form, active: e.target.checked})} />
                 <span>Active (visible to users)</span>
               </label>
-              <button onClick={save} className="w-full py-3 bg-white text-black rounded-lg font-semibold flex items-center justify-center gap-2">
+              <button onClick={save} className="w-full py-3 bg-primary text-primary-foreground rounded-lg font-semibold flex items-center justify-center gap-2">
                 <Save className="w-4 h-4" /> Save Changes
               </button>
             </div>
@@ -147,11 +147,11 @@ const AdminProducts: React.FC = () => {
 
 const Field: React.FC<{ label: string; value: string; onChange: (v: string) => void; textarea?: boolean; placeholder?: string }> = ({ label, value, onChange, textarea, placeholder }) => (
   <div>
-    <label className="block text-xs text-white/60 mb-1 uppercase tracking-wide">{label}</label>
+    <label className="block text-xs text-muted-foreground mb-1 uppercase tracking-wide">{label}</label>
     {textarea ? (
-      <textarea value={value || ''} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} rows={3} className="w-full px-3 py-2 bg-white/5 border border-white/15 rounded-lg outline-none focus:border-white text-white" />
+      <textarea value={value || ''} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} rows={3} className="w-full px-3 py-2 bg-background border border-border rounded-lg outline-none focus:border-foreground text-foreground" />
     ) : (
-      <input value={value || ''} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} className="w-full px-3 py-2 bg-white/5 border border-white/15 rounded-lg outline-none focus:border-white text-white" />
+      <input value={value || ''} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} className="w-full px-3 py-2 bg-background border border-border rounded-lg outline-none focus:border-foreground text-foreground" />
     )}
   </div>
 );
